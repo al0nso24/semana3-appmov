@@ -78,8 +78,8 @@ const styles = StyleSheet.create({
   menu: {
     flexDirection: "row",
     justifyContent: "space-around",
-    marginTop: 70,
-    marginBottom: 30
+    paddingTop: 70,  //Esto es para la separación entre página y barra superior del celular
+    marginBottom: 33
   },
 
   titulo: {

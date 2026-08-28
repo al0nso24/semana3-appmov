@@ -1,8 +1,10 @@
 import { useState } from "react";
+import { ScrollView } from "react-native";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 const usuarios = [
     {
+        id: 1,  //id para mapear
         imagen: require("../../assets/chiikawa.png"),
         nombre: "Alonso Zegarra Velásquez",
         edad: "20 years",
@@ -14,37 +16,41 @@ const usuarios = [
     },
 
     {
-        imagen: "../../assets/chiikawa.png",
-        nombre: "Alonso Zegarra Velásquez",
-        edad: "20 years",
-        bio: "Hello, I'm Alonso",
-        genero: "Male",
-        union: "Mar 04, 2023",
+        id: 2,  //id para mapear
+        imagen: require("../../assets/bobafett.png"),
+        nombre: "Gegi Minky",
+        edad: "19 years",
+        bio: "...",
+        genero: "Female",
+        union: "Mar 05, 2023",
         location: "Lima, Peru",
         reviews: "⭐⭐"
     },
 
     {
-        imagen: require("../../assets/chiikawa.png"),
-        nombre: "Alonso Zegarra Velásquez",
-        edad: "20 years",
-        bio: "Hello y'all, I'm Alonso",
-        genero: "Male",
-        union: "Mar 04, 2023",
-        location: "Lima, Peru",
+        id: 3,  //id para mapear
+        imagen: require("../../assets/nose.jpg"),
+        nombre: "Karol Figueroa",
+        edad: "21 years",
+        bio: ":v",
+        genero: "Female",
+        union: "August 28, 2026",
+        location: "Barcelona, España",
         reviews: "⭐⭐⭐⭐"
     },
 
     {
-        imagen: require("../../assets/chiikawa.png"),
-        nombre: "Alonso Zegarra Velásquez",
+        id: 4,  //id para mapear
+        imagen: require("../../assets/usagi.jpeg"),
+        nombre: "Alonso Dospuntosuve",
         edad: "20 years",
-        bio: "Hello y'all, I'm Alonso",
+        bio: "Hello, I'm Alonso",
         genero: "Male",
-        union: "Mar 04, 2023",
+        union: "August 28, 2026",
         location: "Lima, Peru",
-        reviews: "⭐⭐⭐⭐"
+        reviews: "⭐"
     },
+
 ]
 
 function PerfilCard({ usuario }) {
@@ -54,8 +60,8 @@ function PerfilCard({ usuario }) {
         <View style={styles.card}>
             <Text style={styles.titulo}>User Profile</Text>
             <Image source={usuario.imagen} style={styles.imagen} />
-            <Text style={styles.titulo}>Alonso Zegarra Velásquez</Text>
-            <Text style={styles.edad}>20 years old</Text>
+            <Text style={styles.titulo}>{usuario.nombre}</Text>
+            <Text style={styles.edad}>{usuario.edad}</Text>
             <TouchableOpacity
                 style={[styles.btn_agregar, agregado && styles.efecto_agregado]}
                 onPress={() => setAgregado((estado) => !estado)}
@@ -89,25 +95,26 @@ function PerfilCard({ usuario }) {
 
 export default function Tarjeta() {
     return (
-        <View style={styles.contenedor}>
-            {usuarios.map((usuario) => (
-                <PerfilCard key={usuario.nombre} usuario={usuario} />
-            ))}
+        <View style={{ flex: 1 }}>
+            <ScrollView contentContainerStyle={styles.contenedor}>
+                {usuarios.map((usuario) => (
+                    <PerfilCard key={usuario.id} usuario={usuario} />
+                ))}
+            </ScrollView>
         </View>
     );
 }
 
 const styles = StyleSheet.create({
     contenedor: {
-        flex: 1,
         width: "100%",
         flexDirection: "row",
         flexWrap: "wrap",
         justifyContent: "center",
         alignContent: "center",
-        backgroundColor: "#d3d3d3",
         padding: 4,
-        gap: 6
+        gap: 6,
+        paddingBottom: 40  //Esto es para la separación entre página y barra inferior del celular
     },
 
     card: {
@@ -116,7 +123,10 @@ const styles = StyleSheet.create({
         padding: 6,
         alignItems: "center",
         borderRadius: 10,
-        backgroundColor: "white",
+        backgroundColor: "#f8f8f8",
+        borderWidth: 1,
+        borderColor: "#f3f2f2",
+        borderStyle: "solid"
     },
 
     imagen: {
