@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ScrollView } from "react-native";
+import { ScrollView, useWindowDimensions } from "react-native";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 const usuarios = [  //Lista de usuarios
@@ -56,11 +56,11 @@ const usuarios = [  //Lista de usuarios
 
 ]
 
-function PerfilCard({ usuario, isOnline = false }) {
+function PerfilCard({ usuario, isOnline = false, cardWidth }) {
     const [agregado, setAgregado] = useState(false);
 
     return (
-        <View style={styles.card}>
+        <View style={[styles.card, { width: cardWidth }]}>
             <Text style={styles.titulo}>User Profile</Text>
             <View style={styles.avatarWrap}>
                 <Image source={usuario.imagen} style={styles.imagen} />
@@ -105,12 +105,20 @@ function PerfilCard({ usuario, isOnline = false }) {
 }
 
 export default function Tarjeta() {
+    const { width } = useWindowDimensions();
+    const cardWidth = width < 600 ? "100%" : "48%";  //Si es menor a 600: Una tarjeta por fila
+
     return (
         <View style={{ flex: 1 }}>
             {/*ScrollView es para habilitar el scroll en la página*/}
             <ScrollView contentContainerStyle={styles.contenedor}>
                 {usuarios.map((usuario) => (
-                    <PerfilCard key={usuario.id} usuario={usuario} isOnline={usuario.isOnline ?? false} />
+                    <PerfilCard
+                        key={usuario.id}
+                        usuario={usuario}
+                        isOnline={usuario.isOnline ?? false}
+                        cardWidth={cardWidth}
+                    />
                 ))}
             </ScrollView>
         </View>
@@ -130,7 +138,6 @@ const styles = StyleSheet.create({
     },
 
     card: {
-        width: "48%",
         margin: 2,
         padding: 6,
         alignItems: "center",
