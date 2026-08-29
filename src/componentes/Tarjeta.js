@@ -2,7 +2,7 @@ import { useState } from "react";
 import { ScrollView } from "react-native";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
-const usuarios = [
+const usuarios = [  //Lista de usuarios
     {
         id: 1,  //id para mapear
         imagen: require("../../assets/chiikawa.png"),
@@ -62,12 +62,17 @@ function PerfilCard({ usuario }) {
             <Image source={usuario.imagen} style={styles.imagen} />
             <Text style={styles.titulo}>{usuario.nombre}</Text>
             <Text style={styles.edad}>{usuario.edad}</Text>
+
+            {/*Lógica del botón:*/}
+            {/*Cuando agregado=true, se aplica el efecto del botón*/}
             <TouchableOpacity
                 style={[styles.btn_agregar, agregado && styles.efecto_agregado]}
                 onPress={() => setAgregado((estado) => !estado)}
             >
-                <Text style={styles.texto_base}>{agregado ? "Agregado" : "Agregar"}</Text>
+                {/*Cuando agregado=true, el texto cambia a "Agregado", también el color*/}
+                <Text style={[styles.texto_base, agregado && styles.texto_agregado]}>{agregado ? "Agregado" : "Agregar"}</Text>
             </TouchableOpacity>
+
             <View style={styles.card_desc}>
                 <Text style={styles.subtitulo}>User info</Text>
                 <View style={styles.contenedor_info}>
@@ -96,6 +101,7 @@ function PerfilCard({ usuario }) {
 export default function Tarjeta() {
     return (
         <View style={{ flex: 1 }}>
+            {/*ScrollView es para habilitar el scroll en la página*/}
             <ScrollView contentContainerStyle={styles.contenedor}>
                 {usuarios.map((usuario) => (
                     <PerfilCard key={usuario.id} usuario={usuario} />
@@ -155,7 +161,7 @@ const styles = StyleSheet.create({
         borderRadius: 7,
     },
 
-    efecto_agregado: {
+    efecto_agregado: {  //Efecto cuando el botón marca como "agregado"
         backgroundColor: "#15803D",
     },
 
@@ -163,6 +169,10 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
         fontSize: 10,
         color: "white",
+    },
+
+    texto_agregado: {  //Efecto cuando el texto está como "agregado"
+        color: "#75da9a"
     },
 
     card_desc: {
@@ -190,7 +200,7 @@ const styles = StyleSheet.create({
         lineHeight: 10,
     },
 
-    der: {
+    der: {  //Texto que va a la derecha en la parte de info del usuario
         textAlign: "right",
         fontSize: 8,
         lineHeight: 10,
