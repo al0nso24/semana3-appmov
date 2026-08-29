@@ -12,7 +12,8 @@ const usuarios = [  //Lista de usuarios
         genero: "Male",
         union: "Mar 04, 2023",
         location: "Lima, Peru",
-        reviews: "⭐⭐⭐⭐"
+        reviews: "⭐⭐⭐⭐",
+        isOnline: true
     },
 
     {
@@ -36,7 +37,8 @@ const usuarios = [  //Lista de usuarios
         genero: "Female",
         union: "August 28, 2026",
         location: "Barcelona, España",
-        reviews: "⭐⭐⭐⭐"
+        reviews: "⭐⭐⭐⭐",
+        isOnline: true
     },
 
     {
@@ -48,18 +50,22 @@ const usuarios = [  //Lista de usuarios
         genero: "Male",
         union: "August 28, 2026",
         location: "Lima, Peru",
-        reviews: "⭐"
+        reviews: "⭐",
+        isOnline: true
     },
 
 ]
 
-function PerfilCard({ usuario }) {
+function PerfilCard({ usuario, isOnline = false }) {
     const [agregado, setAgregado] = useState(false);
 
     return (
         <View style={styles.card}>
             <Text style={styles.titulo}>User Profile</Text>
-            <Image source={usuario.imagen} style={styles.imagen} />
+            <View style={styles.avatarWrap}>
+                <Image source={usuario.imagen} style={styles.imagen} />
+                {isOnline && <View style={styles.onlineDot} />}
+            </View>
             <Text style={styles.titulo}>{usuario.nombre}</Text>
             <Text style={styles.edad}>{usuario.edad}</Text>
 
@@ -86,7 +92,7 @@ function PerfilCard({ usuario }) {
                     </View>
                     <View>
                         <Text style={styles.der}>{usuario.bio}</Text>
-                        <Text style={styles.der}>{usuario.edad}</Text>
+                        <Text style={[styles.der, {color: "green"}]}>{usuario.edad}</Text>
                         <Text style={styles.der}>{usuario.genero}</Text>
                         <Text style={styles.der}>{usuario.union}</Text>
                         <Text style={styles.der}>{usuario.location}</Text>
@@ -104,7 +110,7 @@ export default function Tarjeta() {
             {/*ScrollView es para habilitar el scroll en la página*/}
             <ScrollView contentContainerStyle={styles.contenedor}>
                 {usuarios.map((usuario) => (
-                    <PerfilCard key={usuario.id} usuario={usuario} />
+                    <PerfilCard key={usuario.id} usuario={usuario} isOnline={usuario.isOnline ?? false} />
                 ))}
             </ScrollView>
         </View>
@@ -135,11 +141,29 @@ const styles = StyleSheet.create({
         borderStyle: "solid"
     },
 
+    avatarWrap: {
+        position: "relative",
+        alignItems: "center",
+        justifyContent: "center",
+    },
+
     imagen: {
         width: 45,
         height: 45,
         marginVertical: 4,
         borderRadius: 200,
+    },
+
+    onlineDot: {
+        position: "absolute",
+        right: 2,
+        bottom: 8,
+        width: 12,
+        height: 12,
+        borderRadius: 999,
+        backgroundColor: "#22c55e",
+        borderWidth: 2,
+        borderColor: "#fff",
     },
 
     titulo: {
