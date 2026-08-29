@@ -155,8 +155,8 @@ const styles = StyleSheet.create({
     },
 
     imagen: {
-        width: 45,
-        height: 45,
+        width: 60,
+        height: 60,
         marginVertical: 4,
         borderRadius: 200,
     },
@@ -174,14 +174,14 @@ const styles = StyleSheet.create({
     },
 
     titulo: {
-        fontSize: 11,
+        fontSize: 15,
         fontWeight: "bold",
         textAlign: "center",
     },
 
     edad: {
         color: "gray",
-        fontSize: 9
+        fontSize: 13
     },
 
     btn_agregar: {
@@ -198,7 +198,7 @@ const styles = StyleSheet.create({
 
     texto_base: {
         fontWeight: "bold",
-        fontSize: 10,
+        fontSize: 14,
         color: "white",
     },
 
@@ -227,13 +227,13 @@ const styles = StyleSheet.create({
     },
 
     info: {
-        fontSize: 8,
-        lineHeight: 10,
+        fontSize: 13,
+        lineHeight: 17,
     },
 
     der: {  //Texto que va a la derecha en la parte de info del usuario
         textAlign: "right",
-        fontSize: 8,
-        lineHeight: 10,
+        fontSize: 13,
+        lineHeight: 17,
     },
 });
